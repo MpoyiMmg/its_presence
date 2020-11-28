@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ProfessorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+/*
+|--------------------------------------------------------------------------
+| Professors
+|--------------------------------------------------------------------------
+|
+| Here we have all professors's routes
+|
+*/
+Route::post('/professors', [ProfessorController::class, 'index']);
+Route::post('/professors/create', [ProfessorController::class, 'store']);
+Route::post('/professors/{id}', [ProfessorController::class, 'update']);
+Route::post('/professors/show/{id}', [ProfessorController::class, 'destroy']);
