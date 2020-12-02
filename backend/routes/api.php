@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\LoginController;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Api\ProfessorController;
 
 /*
@@ -26,6 +30,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 | Here we have all professors's routes
 |
 */
+
+Route::post('/login', [LoginController::class, 'authenticate']);
+
 Route::post('/professors', [ProfessorController::class, 'index']);
 Route::post('/professors/create', [ProfessorController::class, 'store']);
 Route::post('/professors/{id}', [ProfessorController::class, 'update']);
