@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\LoginController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\LoginController;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Api\ProfessorController;
+use App\Http\Controllers\Api\PedagogycUnityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,15 @@ use App\Http\Controllers\Api\ProfessorController;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/**
+ *  Routes of Pedagogic unity
+ */
+Route::post('/unitePedagogique', [PedagogycUnityController::class, 'store']);
+Route::get('/unitePedagogique', [PedagogycUnityController::class, 'index']);
+Route::get('/unitePedagogique/{id}', [PedagogycUnityController::class, 'show']);
+Route::put('/unitePedagogique/{id}', [PedagogycUnityController::class, 'update']);
+Route::delete('/unitePedagogique/{id}', [PedagogycUnityController::class, 'destroy']);
 /*
 |--------------------------------------------------------------------------
 | Professors

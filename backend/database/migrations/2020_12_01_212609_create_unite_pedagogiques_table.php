@@ -16,7 +16,7 @@ class CreateUnitePedagogiquesTable extends Migration
         Schema::create('unite_pedagogiques', function (Blueprint $table) {
             $table->id();
             $table->string('designation');
-            $table->string('is_deleted');
+            $table->boolean('is_deleted');
             $table->timestamps();
         });
     }
