@@ -27,11 +27,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 /**
  *  Routes of Pedagogic unity
  */
-Route::post('/unitePedagogique', [PedagogycUnityController::class, 'store']);
-Route::get('/unitePedagogique', [PedagogycUnityController::class, 'index']);
-Route::get('/unitePedagogique/{id}', [PedagogycUnityController::class, 'show']);
-Route::put('/unitePedagogique/{id}', [PedagogycUnityController::class, 'update']);
-Route::delete('/unitePedagogique/{id}', [PedagogycUnityController::class, 'destroy']);
+Route::post('/pedagogyc-Unities', [PedagogycUnityController::class, 'store']);
+Route::get('/pedagogyc-Unities', [PedagogycUnityController::class, 'index']);
+Route::get('/pedagogyc-Unities/{id}', [PedagogycUnityController::class, 'show']);
+Route::put('/pedagogyc-Unities/{id}', [PedagogycUnityController::class, 'update']);
+Route::delete('/pedagogyc-Unities/{id}', [PedagogycUnityController::class, 'destroy']);
 /*
 |--------------------------------------------------------------------------
 | Professors
