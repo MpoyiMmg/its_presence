@@ -15,7 +15,16 @@ class PedagogycUnityController extends Controller
      */
     public function index()
     {
-        return unite_pedagogique::orderBy('created_at', 'desc')->get();
+        try {
+            $pedagogic_unities = unite_pedagogique::all();
+        } catch (Exception  $exception) {
+            return response()->json([
+                'error' => $exception->getMessage()
+            ], 500);
+        }
+        return response()->json([
+            'pedagogic_unities' => $pedagogic_unities
+        ], 200);
     }
 
     /**
@@ -35,9 +44,7 @@ class PedagogycUnityController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $user_id = $request->user()->id;
-        
+    {   
         try {
             
             $this->validate($request, [
@@ -48,7 +55,6 @@ class PedagogycUnityController extends Controller
             $unite_pedagogique = unite_pedagogique::Create([
                 'designation' => $request->designation,
                 'is_deleted' => $request->is_deleted,
-                'user_id' => $user_id,
             ]);
 
         } catch(Exception $exception) {
@@ -72,10 +78,24 @@ class PedagogycUnityController extends Controller
      * @param  \App\Models\unite_pedagogique  $unite_pedagogique
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Request $request,Unite_pedagogique $unite_pedagogique)
     {
-        $unite_pedagogique_id = $request->id;
-        return unite_pedagogique::find($unite_pedagogique_id);
+        try {
+            $unite_pedagogique = unite_pedagogique::find($request->id);
+            if (empty($unite_pedagogique)) {
+                return response()->json([
+                    'message' => 'Aucune unité pedagogique coresspondante.'
+                ], 404);
+            }
+
+        } catch (Exception $exception) {
+            return response()->json([
+                'error' => $e->getMessage() 
+            ], 500);
+        }
+        return response()->json([
+            "unite_pedagogique" => $unite_pedagogique,
+        ], 200);
     }
 
     /**
@@ -136,9 +156,24 @@ class PedagogycUnityController extends Controller
      * @param  \App\Models\unite_pedagogique  $unite_pedagogique
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request,Unite_pedagogique $unite_pedagogique)
     {
-        $unitePedagoqique_id = $request->id;
-        Metadata::where('id', $unitePedagoqique_id)->delete();
+        try {
+            $unite_pedagogique = $unite_pedagogique->find($request->id);
+            if (empty($unite_pedagogique)) {
+                return response()->json([
+                    'message' => 'Aucune unité pedagogique correspondante.'
+                ], 404);
+            } else {
+                unite_pedagogique::where('id', $unite_pedagogique->id)->delete();
+            } 
+        } catch(Exception $exception) {
+            return response()->json([
+                'message' => $exception->getMessage(),
+            ], 500);
+        }
+        return response()->json([
+            "message" => "L'Unité pedagogique a été supprimée avec succès.",
+        ], 200);
     }
-}
+    }
