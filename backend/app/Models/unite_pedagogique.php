@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class unite_pedagogique extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'designation', 'is_deleted'
+    ];
 }
