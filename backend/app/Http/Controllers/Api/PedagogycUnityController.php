@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\unite_pedagogique;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class UnitePedagogique extends Controller
+class PedagogycUnityController extends Controller
 {
     /**
      * Display a listing of the resource.
